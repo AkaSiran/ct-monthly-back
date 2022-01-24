@@ -18,7 +18,7 @@ ruoyi:
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
-  port: 8080
+  port: 17080
   servlet:
     # 应用的访问路径
     context-path: /
@@ -92,13 +92,29 @@ token:
     expireTime: 30
   
 # MyBatis配置
-mybatis:
-    # 搜索指定包别名
-    typeAliasesPackage: com.ruoyi.project.**.domain
-    # 配置mapper的扫描，找到所有的mapper.xml映射文件
-    mapperLocations: classpath*:mybatis/**/*Mapper.xml
-    # 加载全局的配置文件
-    configLocation: classpath:mybatis/mybatis-config.xml
+#mybatis:
+#    # 搜索指定包别名
+#    typeAliasesPackage: com.ruoyi.project.**.domain
+#    # 配置mapper的扫描，找到所有的mapper.xml映射文件
+#    mapperLocations: classpath*:mybatis/**/*Mapper.xml
+#    # 加载全局的配置文件
+#    configLocation: classpath:mybatis/mybatis-config.xml
+#SpringBoot整合MybatisPlus
+mybatis-plus:
+  #设置别名包
+  type-aliases-package: com.ruoyi.project.**.domain
+  #加载映射文件
+  mapper-locations: classpath*:mybatis/**/*Mapper.xml
+  #开启驼峰映射
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 
 # PageHelper分页插件
 pagehelper: 

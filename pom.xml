@@ -39,6 +39,7 @@
         <oshi.version>5.8.6</oshi.version>
         <jna.version>5.10.0</jna.version>
         <velocity.version>2.3</velocity.version>
+        <mybatisplus.version>3.5.0</mybatisplus.version>
     </properties>
 
     <dependencies>
@@ -101,10 +102,17 @@
         </dependency>
 
         <!-- SpringBoot集成mybatis框架 -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis.spring.boot.starter.version}</version>
+        </dependency>-->
+
+        <!-- 整合mybatisplus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatisplus.version}</version>
         </dependency>
 
         <!-- pagehelper 分页插件 -->

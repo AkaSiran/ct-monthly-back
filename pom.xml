@@ -40,6 +40,7 @@
         <jna.version>5.10.0</jna.version>
         <velocity.version>2.3</velocity.version>
         <mybatisplus.version>3.5.0</mybatisplus.version>
+        <hutool.version>5.6.5</hutool.version>
     </properties>
 
     <dependencies>
@@ -259,6 +260,19 @@
                     <groupId>javax.servlet</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- 整合lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- 整合hutool-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
 
 	</dependencies>

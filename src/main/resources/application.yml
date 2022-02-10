@@ -18,7 +18,7 @@ ruoyi:
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
-  port: 17080
+  port: 17001
   servlet:
     # 应用的访问路径
     context-path: /
@@ -148,3 +148,8 @@ gen:
   autoRemovePre: false
   # 表前缀（生成类名不会包含表前缀，多个用逗号分隔）
   tablePrefix: sys_
+
+file:
+  saveUrl:
+  #修改成外网api地址
+  localFileRequest: http://192.168.0.60:18001/system/file/online/

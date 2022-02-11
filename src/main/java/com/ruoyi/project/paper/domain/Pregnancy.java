@@ -24,6 +24,9 @@ public class Pregnancy
     /** 文件标识 */
     private Long fileId;
 
+    /** 试纸深度 */
+    private String degree;
+
     /** 操作时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date operateTime;

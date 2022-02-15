@@ -27,6 +27,12 @@ public class Pregnancy
     /** 试纸深度 */
     private String degree;
 
+    /**图片名称*/
+    private String imgName;
+
+    /**图片base64*/
+    private String imgUrl;
+
     /** 操作时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date operateTime;

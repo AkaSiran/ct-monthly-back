@@ -11,7 +11,6 @@ import com.ruoyi.project.paper.service.PregnancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -53,10 +52,8 @@ public class PregnancyController extends BaseController
     @PreAuthorize("@ss.hasPermi('paper:pregnancy:add')")
     @Log(title = "pregnancy", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestParam("file") MultipartFile file)
+    public AjaxResult add(@RequestBody RequestPregnancyDto requestPregnancyDto)
     {
-        RequestPregnancyDto requestPregnancyDto = new RequestPregnancyDto();
-        requestPregnancyDto.setFile(file);
         return pregnancyService.insertPregnancy(requestPregnancyDto);
     }
 

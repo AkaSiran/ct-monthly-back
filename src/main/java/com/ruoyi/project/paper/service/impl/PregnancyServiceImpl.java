@@ -14,7 +14,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.Lists;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -28,7 +27,13 @@ public class PregnancyServiceImpl extends ServiceImpl<PregnancyMapper,Pregnancy>
     @Override
     public ResponsePregnancyDto selectPregnancyById(Long id)
     {
-        return null;
+        Pregnancy pregnancy = getById(id);
+        ResponsePregnancyDto responsePregnancyDto = new ResponsePregnancyDto();
+        if(null!=pregnancy && null!=pregnancy.getId())
+        {
+            BeanUtils.copyProperties(pregnancy,responsePregnancyDto);
+        }
+        return responsePregnancyDto;
     }
 
     @Override
@@ -54,18 +59,19 @@ public class PregnancyServiceImpl extends ServiceImpl<PregnancyMapper,Pregnancy>
     @Override
     public AjaxResult insertPregnancy(RequestPregnancyDto requestPregnancyDto)
     {
-        MultipartFile file = requestPregnancyDto.getFile();
-        if(!file.isEmpty())
-        {
-            System.out.println(file.getOriginalFilename());
-        }
+        Pregnancy pregnancy = new Pregnancy();
+        BeanUtils.copyProperties(requestPregnancyDto,pregnancy);
+        save(pregnancy);
         return AjaxResult.success();
     }
 
     @Override
     public AjaxResult updatePregnancy(RequestPregnancyDto requestPregnancyDto)
     {
-        return null;
+        Pregnancy pregnancy = new Pregnancy();
+        BeanUtils.copyProperties(requestPregnancyDto,pregnancy);
+        updateById(pregnancy);
+        return AjaxResult.success();
     }
 
     @Override

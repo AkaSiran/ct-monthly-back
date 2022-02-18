@@ -9,10 +9,12 @@ import com.ruoyi.project.paper.dto.RequestPregnancyDto;
 import com.ruoyi.project.paper.dto.ResponsePregnancyDto;
 import com.ruoyi.project.paper.mapper.PregnancyMapper;
 import com.ruoyi.project.paper.service.PregnancyService;
+import com.ruoyi.project.system.service.ISysDictDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.Lists;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +26,10 @@ import java.util.List;
 @Service
 public class PregnancyServiceImpl extends ServiceImpl<PregnancyMapper,Pregnancy> implements PregnancyService
 {
+
+    @Autowired
+    private ISysDictDataService sysDictDataService;
+
     @Override
     public ResponsePregnancyDto selectPregnancyById(Long id)
     {
@@ -32,6 +38,13 @@ public class PregnancyServiceImpl extends ServiceImpl<PregnancyMapper,Pregnancy>
         if(null!=pregnancy && null!=pregnancy.getId())
         {
             BeanUtils.copyProperties(pregnancy,responsePregnancyDto);
+            //试纸深度字典转换
+            String degree = pregnancy.getDegree();
+            if(StringUtils.isNotBlank(degree))
+            {
+                String degreeLabel = sysDictDataService.selectDictLabel("t_pregnancy_degree",degree);
+                responsePregnancyDto.setDegreeLabel(degreeLabel);
+            }
         }
         return responsePregnancyDto;
     }

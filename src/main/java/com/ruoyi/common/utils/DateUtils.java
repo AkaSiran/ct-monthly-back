@@ -1,10 +1,12 @@
 package com.ruoyi.common.utils;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.lang.management.ManagementFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import org.apache.commons.lang3.time.DateFormatUtils;
 
 /**
  * 时间工具类
@@ -151,5 +153,45 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         // 计算差多少秒//输出结果
         // long sec = diff % nd % nh % nm / ns;
         return day + "天" + hour + "小时" + min + "分钟";
+    }
+
+    public static int dayDifference(Date endDate, Date beginDate)
+    {
+        long nd = 1000 * 24 * 60 * 60;
+        // 获得两个时间的毫秒时间差异
+        long diff = endDate.getTime() - beginDate.getTime();
+        // 计算差多少天
+        long day = diff / nd;
+        return (int) day;
+    }
+
+    /**
+     * 日期增减
+     * @param sourceDate
+     * @param addYear
+     * @param addMonth
+     * @param addDay
+     * @param dateFormate
+     * @return
+     */
+    public static String calculateTime(String sourceStr,int addYear,int addMonth,int addDay,String dateFormate)
+    {
+        try
+        {
+            SimpleDateFormat sourceSdf = new SimpleDateFormat(dateFormate);
+            Date sourceDate = sourceSdf.parse(sourceStr);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(sourceDate);
+            calendar.add(Calendar.YEAR,addYear);
+            calendar.add(Calendar.MONTH, addMonth);
+            calendar.add(Calendar.DATE, addDay);
+            SimpleDateFormat targetSdf = new SimpleDateFormat(dateFormate);
+            String targetStr = targetSdf.format(calendar.getTime());
+            return targetStr;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

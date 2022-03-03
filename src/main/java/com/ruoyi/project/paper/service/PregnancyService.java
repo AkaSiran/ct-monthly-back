@@ -1,6 +1,6 @@
 package com.ruoyi.project.paper.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.yulichang.base.MPJBaseService;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.paper.domain.Pregnancy;
 import com.ruoyi.project.paper.dto.RequestPregnancyDto;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Flareon on 2022-2-10.
  */
-public interface PregnancyService extends IService<Pregnancy>
+public interface PregnancyService extends MPJBaseService<Pregnancy>
 {
     /**
      * 查询pregnancy

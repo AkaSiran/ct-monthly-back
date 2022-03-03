@@ -40,6 +40,7 @@
         <jna.version>5.10.0</jna.version>
         <velocity.version>2.3</velocity.version>
         <mybatisplus.version>3.5.0</mybatisplus.version>
+        <mybatisplus.join.version>1.2.1</mybatisplus.join.version>
         <hutool.version>5.6.5</hutool.version>
     </properties>
 
@@ -273,6 +274,13 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
+        </dependency>
+
+        <!-- 整合mybatis-plus-join-->
+        <dependency>
+            <groupId>com.github.yulichang</groupId>
+            <artifactId>mybatis-plus-join</artifactId>
+            <version>${mybatisplus.join.version}</version>
         </dependency>
 
 	</dependencies>

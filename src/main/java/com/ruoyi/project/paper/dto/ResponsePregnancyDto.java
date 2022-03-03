@@ -17,7 +17,7 @@ public class ResponsePregnancyDto extends Pregnancy
 
     /**上次等值时间*/
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private String lastEquivalenceTime;
+    private Date lastEquivalenceTime;
 
     /**上次峰值*/
     private String lastPeakDegreeLabel;
@@ -27,6 +27,9 @@ public class ResponsePregnancyDto extends Pregnancy
     private Date lastPeakTime;
 
     /**本次预估峰值时间*/
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date expectPeakTime;
+
+    /**时间差*/
+    private int dayDifference;
 }

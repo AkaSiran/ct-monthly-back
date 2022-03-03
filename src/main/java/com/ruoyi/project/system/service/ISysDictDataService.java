@@ -1,14 +1,16 @@
 package com.ruoyi.project.system.service;
 
-import java.util.List;
+import com.github.yulichang.base.MPJBaseService;
 import com.ruoyi.project.system.domain.SysDictData;
+
+import java.util.List;
 
 /**
  * 字典 业务层
  * 
  * @author ruoyi
  */
-public interface ISysDictDataService
+public interface ISysDictDataService extends MPJBaseService<SysDictData>
 {
     /**
      * 根据条件分页查询字典数据

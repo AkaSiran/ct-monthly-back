@@ -1,10 +1,11 @@
 package com.ruoyi.project.paper.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.ruoyi.common.enums.DeleteFlagEnum;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.paper.domain.Pregnancy;
@@ -111,10 +112,13 @@ public class PregnancyServiceImpl extends MPJBaseServiceImpl<PregnancyMapper,Pre
     public List<ResponsePregnancyDto> selectPregnancyList(RequestPregnancyDto requestPregnancyDto)
     {
         String degreeParams = requestPregnancyDto.getDegree();
-        List<Pregnancy> list = list(new LambdaQueryWrapper<Pregnancy>()
+        QueryWrapper<Pregnancy> queryWrapper = new QueryWrapper<Pregnancy>();
+        queryWrapper.select("id AS id,degree AS degree,operate_time operateTime");
+        List<Pregnancy> list = list(queryWrapper.lambda()
                 .eq(StringUtils.isNotBlank(degreeParams),Pregnancy::getDegree,degreeParams)
                 .eq(Pregnancy::getDelFlag, DeleteFlagEnum.NORMAL.getCode())
-                .orderByDesc(Pregnancy::getOperateTime));
+                .orderByDesc(Pregnancy::getOperateTime)
+        );
         List<ResponsePregnancyDto> resultList = Lists.newArrayList();
         if(CollectionUtils.isNotEmpty(list))
         {
@@ -140,6 +144,10 @@ public class PregnancyServiceImpl extends MPJBaseServiceImpl<PregnancyMapper,Pre
     {
         Pregnancy pregnancy = new Pregnancy();
         BeanUtils.copyProperties(requestPregnancyDto,pregnancy);
+        pregnancy.setCreateId(SecurityUtils.getUserId());
+        pregnancy.setCreateTime(new Date());
+        pregnancy.setUpdateId(SecurityUtils.getUserId());
+        pregnancy.setUpdateTime(new Date());
         save(pregnancy);
         return AjaxResult.success();
     }
@@ -149,6 +157,8 @@ public class PregnancyServiceImpl extends MPJBaseServiceImpl<PregnancyMapper,Pre
     {
         Pregnancy pregnancy = new Pregnancy();
         BeanUtils.copyProperties(requestPregnancyDto,pregnancy);
+        pregnancy.setUpdateId(SecurityUtils.getUserId());
+        pregnancy.setUpdateTime(new Date());
         updateById(pregnancy);
         return AjaxResult.success();
     }
@@ -164,6 +174,7 @@ public class PregnancyServiceImpl extends MPJBaseServiceImpl<PregnancyMapper,Pre
                 Pregnancy pregnancy = new Pregnancy();
                 pregnancy.setId(id);
                 pregnancy.setDelFlag(DeleteFlagEnum.DELETE.getCode());
+                pregnancy.setUpdateId(SecurityUtils.getUserId());
                 pregnancy.setUpdateTime(new Date());
                 updateById(pregnancy);
                 list.add(pregnancy);
@@ -182,6 +193,7 @@ public class PregnancyServiceImpl extends MPJBaseServiceImpl<PregnancyMapper,Pre
         Pregnancy pregnancy = new Pregnancy();
         pregnancy.setId(id);
         pregnancy.setDelFlag(DeleteFlagEnum.DELETE.getCode());
+        pregnancy.setUpdateId(SecurityUtils.getUserId());
         pregnancy.setUpdateTime(new Date());
         updateById(pregnancy);
         return AjaxResult.success();
